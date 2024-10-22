@@ -23,7 +23,12 @@ app.use(morgan('tiny'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// routes
+// ! routes
+/**
+ * @desc  Shortens a provided URL
+ * @route  POST /
+ * @access  Public
+ */
 app.post('/', async (request: express.Request, response: express.Response) => {
   const { url } = request.body;
 
@@ -37,6 +42,15 @@ app.post('/', async (request: express.Request, response: express.Response) => {
 
   if (!url_regex.test(url)) {
     return response.status(400).json({ error: 'Invalid URL.' });
+  }
+
+  // check if a record exists with the exact same url and send that back if there's any
+  const previous_url_record = await URL.findOne({ destination_url: url });
+
+  if (previous_url_record) {
+    return response.json({
+      short_url: `${process.env.API_BASE_URL}/${previous_url_record.url_id}`,
+    });
   }
 
   // use dynamic import as nanoid doesn't support compiled commonjs module
@@ -56,9 +70,16 @@ app.post('/', async (request: express.Request, response: express.Response) => {
 
   console.log('url_record', url_record);
 
-  return response.json({ short_url: `${process.env.API_BASE_URL}/${url_id}` });
+  return response
+    .status(201)
+    .json({ short_url: `${process.env.API_BASE_URL}/${url_id}` });
 });
 
+/**
+ * @desc  Handles redirecting to destination URL if ID in URL param is valid is valid
+ * @route  GET /:id
+ * @access  Public
+ */
 app.get(
   '/:id',
   async (request: express.Request, response: express.Response) => {
@@ -74,6 +95,7 @@ app.get(
   }
 );
 
+// error handlers
 app.use(
   (
     error: any,
