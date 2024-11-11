@@ -10,9 +10,9 @@ This simple service allows you to quickly turn long URLs into short, shareable l
 
 - **Typescript**
 
-## Base URL
+<!-- ## Base URL
 
-All API requests should be made to: `https://m.onrender.com`
+All API requests should be made to: `https://m.onrender.com` -->
 
 ## Endpoints
 
