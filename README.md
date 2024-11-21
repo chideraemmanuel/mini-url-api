@@ -12,7 +12,7 @@ This simple service allows you to quickly turn long URLs into short, shareable l
 
 <!-- ## Base URL
 
-All API requests should be made to: `https://m.onrender.com` -->
+All API requests should be made to: `https://m-jn9z.onrender.com` -->
 
 ## Endpoints
 
