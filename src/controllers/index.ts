@@ -83,3 +83,29 @@ export const routeToURL = async (
     next(error);
   }
 };
+
+/**
+ * @desc  Checks if a short URL exists for a given ID and returns it. Returns No Content if no URL record is found.
+ * @route  GET /:id/find
+ * @access  Public
+ */
+export const findURLRecord = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = request.params;
+
+    const url_record = await URL.findOne({ url_id: id });
+
+    if (!url_record) {
+      response.status(204).json(null);
+      return;
+    }
+
+    response.json(url_record);
+  } catch (error: any) {
+    next(error);
+  }
+};
