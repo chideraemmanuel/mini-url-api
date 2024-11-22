@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import 'dotenv/config';
 import './config/database';
+import cors from 'cors';
 import { errorHandler, notFound } from './middlewares/error-handlers';
 import router from './routes';
 
@@ -9,7 +10,14 @@ const app = express();
 
 const port = process.env.PORT || 5001;
 
-app.use(morgan('tiny'));
+app.use(morgan('dev'));
+
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
 // body parser
 app.use(express.json());
