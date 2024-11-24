@@ -32,3 +32,5 @@ app.use(errorHandler);
 app.listen(port, () =>
   console.log(`Server started and is listening on http://localhost:${port}`)
 );
+
+export default app;
