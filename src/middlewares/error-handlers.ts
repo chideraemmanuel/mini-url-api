@@ -6,7 +6,9 @@ export const notFound = (
   response: Response,
   next: NextFunction
 ) => {
-  throw new HttpError(`Not Found - ${request.originalUrl}`, 404);
+  const error = new HttpError(`Not Found - ${request.originalUrl}`, 404);
+
+  next(error);
 };
 
 export const errorHandler = (
