@@ -10,14 +10,14 @@ const app = express();
 
 const port = process.env.PORT || 5001;
 
-app.use(morgan('dev'));
-
 app.use(
   cors({
     origin: true,
     credentials: true,
   })
 );
+
+app.use(morgan('dev'));
 
 // body parser
 app.use(express.json());

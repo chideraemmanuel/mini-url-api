@@ -1,14 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
+import createError from 'http-errors';
 import HttpError from '../lib/http-error';
 
 export const notFound = (
   request: Request,
-  response: Response,
+  _response: Response,
   next: NextFunction
 ) => {
-  const error = new HttpError(`Not Found - ${request.originalUrl}`, 404);
-
-  next(error);
+  next(createError(404, `Not Found - ${request.originalUrl}`));
 };
 
 export const errorHandler = (
