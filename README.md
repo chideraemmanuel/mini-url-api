@@ -8,9 +8,9 @@ This simple service allows you to quickly turn long URLs into short, shareable l
 
 - **Typescript**
 
-<!-- ## Base URL
+## Base URL
 
-All API requests should be made to: `https://m-jn9z.onrender.com` -->
+All API requests should be made to: `https://sulm.vercel.app`
 
 ## Error Handling
 
