@@ -5,7 +5,10 @@ import rateLimit from 'express-rate-limit';
 const limiter = rateLimit({
   windowMs: 1000 * 60, // 1 minute
   limit: 50,
-  message: { error: 'Too many requests, please try again later.' },
+  message: {
+    error:
+      'You have exceeded the maximum number of allowed requests. Please try again later.',
+  },
 });
 
 const router = Router();

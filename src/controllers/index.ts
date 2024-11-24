@@ -4,7 +4,7 @@ import { URL_REGEX } from '../lib/constants';
 import URL from '../models/url';
 
 /**
- * @desc  Shortens a provided URL
+ * @desc  Shortens a provided URL.
  * @route  POST /
  * @access  Public
  */
@@ -30,6 +30,7 @@ export const shortenURL = async (
 
     if (previous_url_record) {
       response.json({
+        url_id: previous_url_record.url_id,
         short_url: `${process.env.API_BASE_URL}/${previous_url_record.url_id}`,
       });
 
@@ -53,14 +54,14 @@ export const shortenURL = async (
 
     response
       .status(201)
-      .json({ short_url: `${process.env.API_BASE_URL}/${url_id}` });
+      .json({ url_id, short_url: `${process.env.API_BASE_URL}/${url_id}` });
   } catch (error: any) {
     next(error);
   }
 };
 
 /**
- * @desc  Handles redirecting to destination URL if ID in URL param is valid is valid
+ * @desc  Handles redirecting to destination URL if ID in URL param is valid.
  * @route  GET /:id
  * @access  Public
  */
